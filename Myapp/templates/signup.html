@@ -1,0 +1,93 @@
+{%extends "masterpage.html"%}
+{%block content%}
+    <script type="text/javascript">
+        function check(form1){
+            var uname = document.getElementById("uname").value;
+            var password = document.getElementById("pass").value;
+            var repass = document.getElementById("repass").value;
+            if(password.length < 8 )
+            {
+                // alert("password is to short");
+                result = document.getElementById("result").innerHTML = "password is to short"
+            }
+            else if(password == uname && password.length > 0)
+            {
+                result = document.getElementById("result").innerHTML = "uname and pass will be same"
+            }
+            else if(password != repass && repass.length > 0)
+            {
+                result = document.getElementById("result").innerHTML = "Pass not match"
+            }
+            else
+            {
+                myform = document.getElementById(form1);
+                // alert(uname+" "+password);
+                // myform.action = "/check"
+                myform.submit();
+            }
+        }
+            function valid(form1)
+            {
+
+            var uname = document.getElementById("uname").value;
+            var password = document.getElementById("pass").value;
+            var repass = document.getElementById("repass").value;
+            var list = ['!','@','#','$'];
+            if(password.length <= 7 )
+            {
+                // alert("password is to short");
+                result = document.getElementById("result").innerHTML = "password is to short"
+            }
+            else if(password == uname && password.length > 0)
+            {
+                result = document.getElementById("result").innerHTML = "uname and pass will be same"
+            }
+            else if(password != repass && repass.length > 0)
+            {
+                result = document.getElementById("result").innerHTML = "Pass not match"
+            }
+            else
+            {
+                result = document.getElementById("result").innerHTML = ""
+            }
+            }
+            
+        
+    </script>
+<body>
+    <div class="container">
+    <form method="post" id="form1">
+        {%csrf_token%}
+        <table class="table" align="center">
+            <tr>
+                <td>Enter First Name</td>
+                <td><input id="fname" type="text" name="fname" required></td>
+            </tr>
+            <tr>
+                <td>Enter Last Name</td>
+                <td><input id="lname" type="text" name="lname" required></td>
+            </tr>
+            <tr>
+                <td>Enter Username</td>
+                <td><input id="uname" type="text" name="uname" required></td>
+            </tr>
+            <tr>
+                <td>Enter Email</td>
+                <td><input id="email" type="email" name="email" required></td>
+            </tr>
+            <tr>
+                <td>Enter Password</td>
+                <td><input id="pass" type="password" name="pass" oninput="valid('form1')"  required></td>
+            </tr>
+            <tr>
+                <td>Re-enter Password</td>
+                <td><input id="repass" type="password" name="repass" oninput="valid('form1')" required></td>
+            </tr>
+            <tr><td colspan="2" align="center"><input type="button" class="btn btn-success" onclick="check('form1')" value="Submit"><br>
+            <span id="result" style="color: red;">{{msg}}</span> <br>
+                    <a href="/login">You have already account so go to login</a></td></tr>
+        </table>
+    </form>
+    </div>
+</body>
+{%endblock%}

@@ -1,0 +1,25 @@
+{%extends "masterpage.html"%}
+{%block content%}
+
+    <div class="container">
+    <form method="post">
+        {%csrf_token%}
+        {%for i in u%}
+        {{i.username}}
+        {%endfor%}
+        <table class="table" align="center"> 
+            <tr>
+                <td>Enter Username</td>
+                <td><input id="uname" type="text" name="uname" required></td>
+            </tr>
+            <tr>
+                <td>Enter Password</td>
+                <td><input id="pass" type="password" name="pass" required></td>
+            </tr>
+            <tr><td colspan="2" align="center"><input type="submit" class="btn btn-success" value="Submit"> <br>
+            <span style="color: red;">{{msg}}</span> <br> 
+                    <a href="/signup">You don't have account so signup plz...</a></td></tr>
+        </table>
+    </form>
+    </div>
+{%endblock%}
